@@ -2,33 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Text;
 
 public class Settings
-{
-    private static string path = Application.dataPath + "/config.ini";
-    public static int width = int.Parse(GetParameter("Field", "Width"));
-    public static int height = int.Parse(GetParameter("Field", "Height"));
-
-    [DllImport("kernel32")]
-    private static extern long WritePrivateProfileString(string section,
-        string key, string val, string filePath);
-    [DllImport("kernel32")]
-    private static extern int GetPrivateProfileString(string section,
-            string key, string def, StringBuilder retVal,
-       int size, string filePath);
+{   
+    public static int width = GetParameter("Field","Width");
+    public static int height = GetParameter("Field", "Height");
 
     public static void WriteParameter(string Section, string Key, string Value)
     {
-        WritePrivateProfileString(Section, Key, Value, path);
+        INIParser ini = new INIParser();
+        ini.Open(Application.dataPath + "/config.ini");
+        ini.WriteValue(Section, Key, Value);
+        ini.Close();
+
     }
 
-    public static string GetParameter(string Section, string Key)
+    public static int GetParameter(string Section, string Key)
     {
-        StringBuilder temp = new StringBuilder(255);
-        GetPrivateProfileString(Section, Key, "" ,temp, 255, path);
-        return temp.ToString();
+        int temp = 0;
+        INIParser ini = new INIParser();
+        ini.Open(Application.dataPath + "/config.ini");
+        temp = ini.ReadValue(Section, Key, 0);
+        ini.Close();
+        return temp;
     }
 
     public static void InitSettings()

@@ -7,11 +7,11 @@ public class MenuControls : MonoBehaviour
 {
    public void StartGame_Pressed()
     {
-        SceneManager.LoadScene("Gameplay");
+        SceneManager.LoadScene(1, LoadSceneMode.Single);
     }
     public void Settings_Pressed()
     {
-        print(Settings.width.ToString());
+        Settings.InitSettings();
     }
 
     public void Records_Pressed()
