@@ -27,36 +27,43 @@ public class GameField
             return false;
     }
 
+    public static void FloodFill(int x, int y, bool[,] visited) // Раскрытие пустых клеток
+    {
+        if (x >= 0 && y >= 0 && x < width && y < height)
+        {
+            if (visited[x, y]) // Остановка в случае проверки данной клетки
+                return;
+
+            cells[x, y].setTexture(incidentMines(x, y));
+
+            if (incidentMines(x, y) > 0)
+                return;
+
+            visited[x, y] = true;
+
+            // Просмотр соседних клеток с рекурсией
+
+            FloodFill(x - 1, y, visited);
+            FloodFill(x + 1, y, visited);
+            FloodFill(x, y - 1, visited);
+            FloodFill(x, y + 1, visited);
+        }
+    }
+
     public static int incidentMines(int x, int y) // Подсчет количества примыкающих мин
     {
        int count = 0;
 
         // Проверка всех клеток в радиусе заданной клетки
-        /*
-         * Проверка проходит:
-         * 
-         * Верхней клетки
-         * Нижней клетки
-         * Левой клетки
-         * Правой клетки
-         * Левой верхней клетки
-         * Правой верхней клетки
-         * Левой нижней клетки
-         * Правой нижней клетки
-         * 
-         */
-
-       for (int i = x - 1; i <= x + 1; i++)
-        {
-            for (int j = y - 1; y <= y + 1; j++)
-            {
-                if (i != x || j != y)
-                {
-                    if (isMine(i, j))
-                        count++;
-                }
-            }
-        }
+      
+        if (isMine(x, y + 1)) ++count;      // Верхняя клетка
+        if (isMine(x + 1, y + 1)) ++count;  // Правая верхняя клетка
+        if (isMine(x + 1, y)) ++count;      //  Правая клетка
+        if (isMine(x + 1, y - 1)) ++count;  // Правая нижняя клетка
+        if (isMine(x, y - 1)) ++count;      // Нижняя клетка
+        if (isMine(x - 1, y - 1)) ++count;  // Левая нижняя клетка
+        if (isMine(x - 1, y)) ++count;      // Левая клетка
+        if (isMine(x - 1, y + 1)) ++count;  // Левая верхняя клетка
 
         return count;
     }

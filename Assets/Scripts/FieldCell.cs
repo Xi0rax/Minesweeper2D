@@ -12,20 +12,46 @@ public class FieldCell : MonoBehaviour
     public Sprite[] incidentTextures;
     public Sprite mineTexture;
 
+    // Позиция клетки на поле
+    private int PosX;
+    private int PosY;
     void Start()
     {
         // Инициализация клетки случайным образом
         mine = Random.value < 0.15;
 
-        // Установка клетки на поле
-        int PosX = (int)transform.position.x;
-        int PosY = (int)transform.position.y;
+        // Смещения на координатной плоскости
+        int offsetX = 400 - (GameField.width * 10) / 2;
+        int offsetY = 160 - (GameField.height * 10) / 2;
 
-    //    GameField.cells[PosX, PosY] = this;
+        PosX = (int)(transform.position.x - offsetX) / 10;
+        PosY = (int)(transform.position.y - offsetY) / 10;
 
+
+        GameField.cells[PosX, PosY] = this;
     }
+
+    // Загрузка текстуры для клетки
+
+
+    void OnMouseUpAsButton()
+    {
+
+       if(this.mine)
+        {
+            GameField.ShowAllMines();
+            print("Loooooooooser!");
+        }
+        else
+        {
+            this.setTexture(GameField.incidentMines(PosX, PosY));
+            GameField.FloodFill(PosX, PosY, new bool[GameField.width, GameField.height]);
+
+
+        }
+         setTexture(GameField.incidentMines(PosX, PosY));
         
-       // Загрузка текстуры для клетки
+    }
 
     public void setTexture(int incident)
     {
@@ -35,17 +61,5 @@ public class FieldCell : MonoBehaviour
             GetComponent<SpriteRenderer>().sprite = incidentTextures[incident];
     }
 
-    private void OnMouseUpAsButton()
-    {
-        if (this.mine)
-            GameField.ShowAllMines();
-        else
-        {
-            int PosX = (int)transform.position.x;
-            int PosY = (int)transform.position.y;
-            this.setTexture(GameField.incidentMines(PosX,PosY)); // Количество окрестных мин
-        }
-
-
-    }
+ 
 }
