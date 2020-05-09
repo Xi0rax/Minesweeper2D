@@ -5,22 +5,25 @@ using UnityEngine.SceneManagement;
 
 public class MenuControls : MonoBehaviour
 {
-   public void StartGame_Pressed()
+
+   
+    public void startPressed()
     {
-        SceneManager.LoadScene(1, LoadSceneMode.Single);
+        SceneManager.LoadScene(1,LoadSceneMode.Single);   
     }
-    public void Settings_Pressed()
+    public void settingsPressed()
     {
         Settings.InitSettings();
     }
 
-    public void Records_Pressed()
+    public void recordsPressed()
     {
-        
+       
     }
 
-    public void Exit_Pressed()
+    public void exitPressed()
     {
+       
         Application.Quit();
     }
 }

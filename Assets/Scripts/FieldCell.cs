@@ -8,6 +8,10 @@ public class FieldCell : MonoBehaviour
     // Находится ли в данной клетке мина
     public bool mine;
 
+    public AudioClip explosion;
+    public AudioClip Uncover;
+    AudioSource fx;
+
     // Данные от текстурах клетки
     public Sprite[] incidentTextures;
     public Sprite mineTexture;
@@ -19,6 +23,8 @@ public class FieldCell : MonoBehaviour
     {
         // Инициализация клетки случайным образом
         mine = Random.value < 0.15;
+
+        fx = GetComponent<AudioSource>();
 
         // Смещения на координатной плоскости
         int offsetX = 400 - (GameField.width * 10) / 2;
@@ -41,12 +47,13 @@ public class FieldCell : MonoBehaviour
         {
             GameField.ShowAllMines();
             print("Loooooooooser!");
+            fx.PlayOneShot(explosion);
         }
         else
         {
             this.setTexture(GameField.incidentMines(PosX, PosY));
             GameField.FloodFill(PosX, PosY, new bool[GameField.width, GameField.height]);
-
+            fx.PlayOneShot(Uncover);
 
         }
          setTexture(GameField.incidentMines(PosX, PosY));
