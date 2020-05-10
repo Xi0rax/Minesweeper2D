@@ -14,11 +14,14 @@ public class ButtonClick : MonoBehaviour
     }
     public void ClickSound()
     {
-        fx.PlayOneShot(click);
+        if (Settings.SoundFX == 1)
+        fx.PlayOneShot(click, Settings.volume);
     }
   
     public void HoverSound()
     {
-        fx.PlayOneShot(hover);
+        if (Settings.SoundFX == 1)
+        fx.PlayOneShot(hover, Settings.volume);
     }
+
 }

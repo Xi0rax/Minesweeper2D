@@ -47,13 +47,16 @@ public class FieldCell : MonoBehaviour
         {
             GameField.ShowAllMines();
             print("Loooooooooser!");
-            fx.PlayOneShot(explosion);
+            if (Settings.SoundFX == 1)
+            fx.PlayOneShot(explosion, Settings.volume);
         }
         else
         {
             this.setTexture(GameField.incidentMines(PosX, PosY));
             GameField.FloodFill(PosX, PosY, new bool[GameField.width, GameField.height]);
-            fx.PlayOneShot(Uncover);
+
+            if (Settings.SoundFX == 1)
+            fx.PlayOneShot(Uncover, Settings.volume);
 
         }
          setTexture(GameField.incidentMines(PosX, PosY));
