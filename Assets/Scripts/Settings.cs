@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 
-public class Settings
+public class Settings // Класс-контейнер для хранения и изменения настроек
 {
     public static int width;
     public static int height;
@@ -65,12 +65,6 @@ public class Settings
                         height = 20;
                         break;
                     }
-                case 2:
-                    {
-                        width = 40;
-                        height = 30;
-                        break;
-                    }
             }
 
             SoundFX = GetParameter("FX", "SoundFX");
@@ -84,10 +78,12 @@ public class Settings
 
     public static void CreateSettings()
     {
+        File.Create(Application.dataPath + "/config.ini").Dispose();
         WriteParameter("Game", "Difficulty", "0");
         WriteParameter("Game", "Markers", "10");
         WriteParameter("FX", "SoundFX", "1");
         WriteParameter("FX", "Volume", "10");
+        InitSettings();
     }
 
     public static void UpdateSettings(int diff, int markers, int fxOn, int volume)

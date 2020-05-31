@@ -8,6 +8,7 @@ public class MenuControls : MonoBehaviour
     private void Start()
     {
         Settings.InitSettings();
+        Records.LoadData();
     }
 
     public void startPressed()
@@ -21,7 +22,7 @@ public class MenuControls : MonoBehaviour
 
     public void recordsPressed()
     {
-       
+        SceneManager.LoadScene("Records", LoadSceneMode.Single);
     }
 
     public void exitPressed()

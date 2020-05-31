@@ -127,8 +127,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mine: 0
+  flagged: 0
+  uncovered: 0
   explosion: {fileID: 8300000, guid: a276038db5cb17c4d971f87d21091e65, type: 3}
   Uncover: {fileID: 8300000, guid: da74f91d34ee9184fbd3963ef14e0e0e, type: 3}
+  Victory: {fileID: 8300000, guid: a8e6d09eabc3ad640b251d552a2ce5ce, type: 3}
   incidentTextures:
   - {fileID: 21300000, guid: 8cb8485289fd6e1419af975000665b37, type: 3}
   - {fileID: 21300000, guid: 1e4a817025f2d1c49a38a8149f4edb76, type: 3}
@@ -140,6 +143,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 856813a1bff28b345ae9721e4705feb0, type: 3}
   - {fileID: 21300000, guid: b22d0ccdcfe0ef34784ba96855c95897, type: 3}
   mineTexture: {fileID: 21300000, guid: 3261d707cc7692d4ba38e364557d1ad3, type: 3}
+  flagTexture: {fileID: 21300000, guid: d59a5f4c1c46eee4fa6c2d0df307dfef, type: 3}
+  initTexture: {fileID: 21300000, guid: e48b657d270dc984fbe6a39813e3ac48, type: 3}
 --- !u!82 &-1034073794046912433
 AudioSource:
   m_ObjectHideFlags: 0
